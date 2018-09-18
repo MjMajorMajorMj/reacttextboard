@@ -1,14 +1,14 @@
 body {
     box-sizing:border-box;
-    background-color:black;
+    background-color:white;
     margin: 0 auto;
     width: 50vw;
 }
 
-h1 {
+.titleText {
     color:rgb(97,218,251);
 }
 
 h3 {
-    color:white;
+    color:black;
 }

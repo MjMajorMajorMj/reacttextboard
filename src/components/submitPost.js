@@ -12,7 +12,7 @@ class SubmitPost extends Component {
                     <label className="replyLabel">Reply</label>
                     <input name="replyPost" type="text" className="form-control"/>
                 </div>
-                <button className="submitPostBtn btn btn-outline-light">Submit</button>
+                <button className="submitPostBtn btn">Submit</button>
             </form>
         )
     };

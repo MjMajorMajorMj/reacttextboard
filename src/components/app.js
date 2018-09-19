@@ -14,7 +14,7 @@ class App extends Component {
     }
     addReply(reply) {
         this.setState({
-            replies: [reply, ...this.state.replies]
+            replies: [...this.state.replies, reply]
         });
     }
     render() {

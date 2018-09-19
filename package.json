@@ -2,6 +2,11 @@
   "name": "react-prototypes",
   "version": "1.0.0",
   "description": "React prototypes for learning React, pairs with http://reactPrototypes.com",
+  "proxy": {
+    "/api/*": {
+      "target": "http://localhost:8000"
+    }
+  },
   "main": "index.js",
   "scripts": {
     "start": "node dev_server.js",

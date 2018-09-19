@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './app.css';
 import SubmitPost from './submitPost';
 import ReplyList from './replyList';
 import ReplyData from '../components/dummyReply';
+import axios from 'axios';
+import './app.css';
 
 class App extends Component {
     constructor(props) {
@@ -13,6 +14,13 @@ class App extends Component {
         this.addReply = this.addReply.bind(this);
     }
     addReply(reply) {
+        let params = new URLSearchParams();
+        const replyMsgToServer = reply.replyMsg;
+        params.append('replyMsg', replyMsgToServer);
+        params.append('action', 'insertReply');
+        axios.post('/api/data.php', params).then((resp) => {
+            console.log('Server response:', resp);
+        });
         this.setState({
             replies: [...this.state.replies, reply]
         });

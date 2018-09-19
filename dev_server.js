@@ -5,7 +5,7 @@ const config = require('./webpack.config');
 const PORT = process.env.PORT || 3000;
 
 new WebpackDevServer(webpack(config), {
-    contentBase: resolve(__dirname, 'dist'),
+    contentBase: resolve(__dirname, 'public', 'dist'),
     publicPath: '/',
     hot: false,
     historyApiFallback: true,

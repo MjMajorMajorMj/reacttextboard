@@ -3,17 +3,18 @@ define('fromData',true);
 if(empty($_POST['action'])){
 	exit('no action specified');
 };
+
 require('mysql_connect.php');
 $output = [
 	'success'=> false,
 	'errors'=>[]
 ];
 switch($_POST['action']){
-	case 'readAll':
-		include 'dataApi/read.php';
+	case 'readReplies':
+		include 'readReplies.php';
 		break;
 	case 'insertReply':
-		include 'getReplies.php';
+		include 'submitPost.php';
 		break;
 };
 $outputJSON = json_encode($output);

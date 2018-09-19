@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SubmitPost from './submitPost';
 import ReplyList from './replyList';
-import ReplyData from '../components/dummyReply';
 import axios from 'axios';
 import './app.css';
 
@@ -9,9 +8,24 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            replies: ReplyData
+            replies: []
         }
         this.addReply = this.addReply.bind(this);
+    }
+    componentDidMount() {
+        let params = new URLSearchParams();
+        params.append('action', 'readReplies');
+        axios.post('/api/data.php', params).then((resp) => {
+            const { data } = resp;
+            if (data.success === true) {
+                const responseData = data.data;
+                this.setState({
+                    replies: responseData
+                });
+            } else {
+                console.log('error');
+            };
+        });
     }
     addReply(reply) {
         let params = new URLSearchParams();

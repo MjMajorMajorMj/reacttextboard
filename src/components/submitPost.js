@@ -12,6 +12,7 @@ class SubmitPost extends Component {
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.reset = this.reset.bind(this);
     };
     handleInputChange(event) {
         const { value, name } = event.target;
@@ -24,7 +25,15 @@ class SubmitPost extends Component {
     handleSubmit(event) {
         event.preventDefault();
         this.props.add(this.state.form);
-    }
+        this.reset();
+    };
+    reset() {
+        this.setState({
+            form: {
+                replyMsg: ''
+            }
+        });
+    };
     render() {
         const { replyMsg } = this.state.form;
         return (

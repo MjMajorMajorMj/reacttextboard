@@ -33,10 +33,10 @@ class App extends Component {
         params.append('replyMsg', replyMsgToServer);
         params.append('action', 'insertReply');
         axios.post('/api/data.php', params).then((resp) => {
-            console.log('Server response:', resp);
-        });
-        this.setState({
-            replies: [...this.state.replies, reply]
+            const insertedReply = resp.data.data[0];
+            this.setState({
+                replies: [...this.state.replies, insertedReply]
+            });
         });
     }
     render() {

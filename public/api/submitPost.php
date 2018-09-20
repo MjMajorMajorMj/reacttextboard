@@ -49,16 +49,17 @@ function addReplyToThread($message, $userID, $conn) {
         $output['errors'][] = 'database error - addReplytoThread';
     } else {
         if ($insertReplyResult > 0 ) {
-            getInsertReply($message, $userID, $conn);
+            $insertID = mysqli_insert_id($conn);
+            getInsertReply($insertID, $conn);
         } else {
             $output['errors'][] = 'no data';
         };
     };
 };
 
-function getInsertReply($message, $userID, $conn) {
+function getInsertReply($insertID, $conn) {
     global $output;
-    $retrieveReplyFromDBQuery = "SELECT * FROM `testthread` WHERE `userID` = '$userID' AND `message` = '$message'";
+    $retrieveReplyFromDBQuery = "SELECT * FROM `testthread` WHERE `postNum` = '$insertID'";
     $retrievedReplyResult = mysqli_query($conn, $retrieveReplyFromDBQuery);
     if (empty($retrievedReplyResult)) {
         $output['errors'][] = 'database error - getInsertReply';

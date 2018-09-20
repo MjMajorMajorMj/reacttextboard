@@ -11,8 +11,12 @@ class App extends Component {
             replies: []
         }
         this.addReply = this.addReply.bind(this);
+        this.fetchRepliesFromThread = this.fetchRepliesFromThread.bind(this);
     }
     componentDidMount() {
+        this.fetchRepliesFromThread();
+    }
+    fetchRepliesFromThread() {
         let params = new URLSearchParams();
         params.append('action', 'readReplies');
         axios.post('/api/data.php', params).then((resp) => {

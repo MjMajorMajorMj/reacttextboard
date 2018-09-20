@@ -1,0 +1,13 @@
+.replyMsgCard p {
+    display:inline-block;
+    margin: 0 5px;
+}
+
+.replyMsgCard { 
+    text-align:center;
+}
+
+.replyMsgCardText p {
+    text-align:center;
+    margin: 5px 0;
+}

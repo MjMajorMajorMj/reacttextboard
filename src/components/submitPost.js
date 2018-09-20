@@ -7,7 +7,7 @@ class SubmitPost extends Component {
         super(props);
         this.state = {
             form: {
-                replyMsg: ''
+                message: ''
             }
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -30,7 +30,7 @@ class SubmitPost extends Component {
     reset() {
         this.setState({
             form: {
-                replyMsg: ''
+                message: ''
             }
         });
     };
@@ -38,7 +38,7 @@ class SubmitPost extends Component {
         const { replyMsg } = this.state.form;
         return (
             <form className="submitPostForm text-center" onSubmit={this.handleSubmit}>
-                <Field name="replyMsg" label="Reply" type="text" value={replyMsg} onChange={this.handleInputChange}/>
+                <Field name="message" label="Reply" type="text" value={replyMsg} onChange={this.handleInputChange}/>
                 <button className="submitPostBtn btn">Submit</button>
             </form>
         )

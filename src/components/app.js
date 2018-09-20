@@ -29,7 +29,7 @@ class App extends Component {
     }
     addReply(reply) {
         let params = new URLSearchParams();
-        const replyMsgToServer = reply.replyMsg;
+        const replyMsgToServer = reply.message;
         params.append('replyMsg', replyMsgToServer);
         params.append('action', 'insertReply');
         axios.post('/api/data.php', params).then((resp) => {

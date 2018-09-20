@@ -1,4 +1,5 @@
 <?php
+ini_set('display_errors', 1);
 define('fromData',true);
 if(empty($_POST['action'])){
 	exit('no action specified');

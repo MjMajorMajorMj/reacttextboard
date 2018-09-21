@@ -1,6 +1,8 @@
 <?php
 
-$query = "SELECT * FROM `testthread`";
+$threadID = $_POST['threadID'];
+
+$query = "SELECT * FROM `$threadID`";
 $result = null;
 
 $result = mysqli_query($conn, $query);

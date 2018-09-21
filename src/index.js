@@ -4,6 +4,6 @@ import ReactDOM from 'react-dom';
 import App from './components/app';
 
 ReactDOM.render(
-    <App />,
+    <App threadID='testthread' />,
     document.getElementById('root')
 );

@@ -40,7 +40,8 @@ function addUserToDB($userIP, $conn) {
 
 function addReplyToThread($message, $userID, $conn) {
     global $output;
-    $insertReplyToThread = "INSERT INTO `testthread` (`message`, `userID`) VALUES ('$message', '$userID')";
+    $threadID = $_POST['threadID'];
+    $insertReplyToThread = "INSERT INTO `$threadID` (`message`, `userID`) VALUES ('$message', '$userID')";
     $insertReplyResult = mysqli_query($conn, $insertReplyToThread);
     if (mysqli_errno($conn)){
         print(mysqli_error($conn));
@@ -50,16 +51,16 @@ function addReplyToThread($message, $userID, $conn) {
     } else {
         if ($insertReplyResult > 0 ) {
             $insertID = mysqli_insert_id($conn);
-            getInsertReply($insertID, $conn);
+            getInsertReply($insertID, $conn, $threadID);
         } else {
             $output['errors'][] = 'no data';
         };
     };
 };
 
-function getInsertReply($insertID, $conn) {
+function getInsertReply($insertID, $conn, $threadID) {
     global $output;
-    $retrieveReplyFromDBQuery = "SELECT * FROM `testthread` WHERE `postNum` = '$insertID'";
+    $retrieveReplyFromDBQuery = "SELECT * FROM `$threadID` WHERE `postNum` = '$insertID'";
     $retrievedReplyResult = mysqli_query($conn, $retrieveReplyFromDBQuery);
     if (empty($retrievedReplyResult)) {
         $output['errors'][] = 'database error - getInsertReply';

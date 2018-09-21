@@ -8,7 +8,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            replies: []
+            replies: [],
         }
         this.addReply = this.addReply.bind(this);
         this.fetchRepliesFromThread = this.fetchRepliesFromThread.bind(this);
@@ -19,6 +19,7 @@ class App extends Component {
     fetchRepliesFromThread() {
         let params = new URLSearchParams();
         params.append('action', 'readReplies');
+        params.append('threadID', this.props.threadID);
         axios.post('/api/data.php', params).then((resp) => {
             const { data } = resp;
             if (data.success === true) {
@@ -35,6 +36,7 @@ class App extends Component {
         let params = new URLSearchParams();
         const replyMsgToServer = reply.message;
         params.append('replyMsg', replyMsgToServer);
+        params.append('threadID', this.props.threadID);
         params.append('action', 'insertReply');
         axios.post('/api/data.php', params).then((resp) => {
             const insertedReply = resp.data.data[0];

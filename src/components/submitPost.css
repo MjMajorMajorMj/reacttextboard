@@ -1,3 +1,7 @@
 .replyLabel {
     color:black;
 }
+
+.captchaDiv {
+    display:inline-block;
+}

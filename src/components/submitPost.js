@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import Field from './fieldReply';
+import ReplyAlert from './replyAlert';
 import './submitPost.css';
 
 class SubmitPost extends Component {
@@ -10,7 +11,8 @@ class SubmitPost extends Component {
             form: {
                 message: ''
             },
-            captchaSet: false
+            captchaSet: true, //set to false to enable captcha
+            alertVisible: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,8 +30,11 @@ class SubmitPost extends Component {
     handleSubmit(event) {
         event.preventDefault();
         if (!this.state.captchaSet) {
-            console.log("Please do captcha");
+            console.log("FUG");
         } else {
+            this.setState({
+                alertVisible: true
+            });
             this.props.add(this.state.form);
             this.reset();
         }
@@ -38,24 +43,34 @@ class SubmitPost extends Component {
         this.setState({
             form: {
                 message: ''
-            }
+            },
+            alertVisible:false
+            //captchaSet: false,
         });
+        //window.grecaptcha.reset();
     };
     setCaptcha() {
         this.setState({
-            captchaSet: true
+            captchaSet: true //set to false to enable captcha
         });
     }
     render() {
-        const { replyMsg } = this.state.form;
+        const { alertVisible } = this.state;
+        const { message } = this.state.form;
+        console.log(alertVisible);
         return (
             <form className="submitPostForm text-center" onSubmit={this.handleSubmit}>
-                <Field name="message" label="Reply" type="text" value={replyMsg} onChange={this.handleInputChange} />
-                <ReCAPTCHA
-                    sitekey="6Lfr4HEUAAAAAD9uGSjg7_LtC2cjZ2ZkK9nU_h49"
-                    onChange={this.setCaptcha}
-                />
-                <button className="submitPostBtn btn m-2">Submit</button>
+            <ReplyAlert visible={alertVisible}/>
+                <Field name="message" label="Reply" type="text" value={message} onChange={this.handleInputChange} />
+                {/* <div className="captchaDiv">
+                    <ReCAPTCHA
+                        sitekey="6Lfr4HEUAAAAAD9uGSjg7_LtC2cjZ2ZkK9nU_h49"
+                        onChange={this.setCaptcha}
+                    />
+        </div> */}
+                <div className="text-center">
+                    <button className="submitPostBtn btn m-2">Submit</button>
+                </div>
             </form>
         )
     };

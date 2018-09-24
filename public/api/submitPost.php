@@ -23,7 +23,7 @@ if (empty($findUserResult)) {
 function addUserToDB($userIP, $conn) {
     global $output;
     $ipToMD5 = md5($userIP);
-    $MD5toUserID = substr($ipToMD5, 0, 6);
+    $MD5toUserID = substr($ipToMD5, 0, 8);
     $insertUserQuery = "INSERT INTO `users` (`userID`, `ipAddress`) VALUES ('$MD5toUserID', '$userIP')";
     $insertUserResult = mysqli_query($conn, $insertUserQuery);
     if (empty($insertUserResult)) {

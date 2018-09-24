@@ -12,3 +12,7 @@ body {
 h3 {
     color:black;
 }
+
+.refreshThreadBtn {
+    margin: 0 auto;
+}

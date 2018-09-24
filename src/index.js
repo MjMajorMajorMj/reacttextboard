@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import App from './components/app';
+import Thread from './components/thread';
 
 ReactDOM.render(
-    <App threadID='testthread' />,
+    <Thread threadID='testthread' />,
     document.getElementById('root')
 );

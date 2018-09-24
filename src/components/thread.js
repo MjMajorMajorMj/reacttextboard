@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import SubmitPost from './submitPost';
 import ReplyList from './replyList';
 import axios from 'axios';
-import './app.css';
+import './thread.css';
 
-class App extends Component {
+class Thread extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -51,10 +51,13 @@ class App extends Component {
                 <h1 className="container text-center titleText">React Textboard</h1>
                 <h3 className="text-center">Thread Name!</h3>
                 <ReplyList replies={this.state.replies} />
+                <div className="text-center">
+                    <button className="refreshThreadBtn btn m-2" onClick={this.fetchRepliesFromThread}>Refresh</button>
+                </div>
                 <SubmitPost add={this.addReply} />
             </div>
         )
     }
 }
 
-export default App;
+export default Thread;

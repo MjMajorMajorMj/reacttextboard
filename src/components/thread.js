@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SubmitPost from './submitPost';
 import ReplyList from './replyList';
 import axios from 'axios';
-import './thread.css';
+import '../assets/css/thread.css';;
 
 class Thread extends Component {
     constructor(props) {

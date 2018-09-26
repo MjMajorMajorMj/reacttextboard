@@ -11,13 +11,16 @@ class SubmitPost extends Component {
             form: {
                 message: ''
             },
-            captchaSet: true, //set to false to enable captcha
-            alertVisible: false
+            captchaSet: false,
+            replyAlertVisible: false,
+            successColor: '',
+            replyAlertMsg: ''
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.reset = this.reset.bind(this);
         this.setCaptcha = this.setCaptcha.bind(this);
+        this.replyAlertDismiss = this.replyAlertDismiss.bind(this);
     };
     handleInputChange(event) {
         const { value, name } = event.target;
@@ -30,10 +33,16 @@ class SubmitPost extends Component {
     handleSubmit(event) {
         event.preventDefault();
         if (!this.state.captchaSet) {
-            console.log("FUG");
+            this.setState({
+                replyAlertVisible: true,
+                successColor: 'warning',
+                replyAlertMsg: 'Please complete the ReCAPTCHA.'
+            });
         } else {
             this.setState({
-                alertVisible: true
+                replyAlertVisible: true,
+                successColor: 'success',
+                replyAlertMsg: 'Post successful!'
             });
             this.props.add(this.state.form);
             this.reset();
@@ -44,33 +53,36 @@ class SubmitPost extends Component {
             form: {
                 message: ''
             },
-            alertVisible:false
-            //captchaSet: false,
+            captchaSet: false
         });
-        //window.grecaptcha.reset();
+        window.grecaptcha.reset();
     };
     setCaptcha() {
         this.setState({
-            captchaSet: true //set to false to enable captcha
+            captchaSet: true
         });
-    }
+    };
+    replyAlertDismiss() {
+        this.setState({
+            replyAlertVisible: false
+        });
+    };
     render() {
-        const { alertVisible } = this.state;
+        const { successColor, replyAlertMsg, replyAlertVisible } = this.state;
         const { message } = this.state.form;
-        console.log(alertVisible);
         return (
             <form className="submitPostForm text-center" onSubmit={this.handleSubmit}>
-            <ReplyAlert visible={alertVisible}/>
                 <Field name="message" label="Reply" type="text" value={message} onChange={this.handleInputChange} />
-                {/* <div className="captchaDiv">
+                <div className="captchaDiv">
                     <ReCAPTCHA
                         sitekey="6Lfr4HEUAAAAAD9uGSjg7_LtC2cjZ2ZkK9nU_h49"
                         onChange={this.setCaptcha}
                     />
-        </div> */}
+                </div>
                 <div className="text-center">
                     <button className="submitPostBtn btn m-2">Submit</button>
                 </div>
+                <ReplyAlert successColor={successColor} replyAlertMsg={replyAlertMsg} replyAlertVisible={replyAlertVisible} replyAlertDismiss={this.replyAlertDismiss}/>
             </form>
         )
     };

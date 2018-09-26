@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import Field from './fieldReply';
 import ReplyAlert from './replyAlert';
-import './submitPost.css';
+import '../assets/css/submitPost.css';
 
 class SubmitPost extends Component {
     constructor(props) {

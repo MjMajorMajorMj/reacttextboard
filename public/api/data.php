@@ -17,6 +17,9 @@ switch($_POST['action']){
 	case 'insertReply':
 		include 'submitPost.php';
 		break;
+	case 'readThreads':
+		include 'readThreads.php';
+		break;
 };
 $outputJSON = json_encode($output);
 print($outputJSON);

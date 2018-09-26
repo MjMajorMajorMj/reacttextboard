@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert } from 'reactstrap';
-import './replyAlert.css';
+import '../assets/css/replyAlert.css';
 
 class ReplyAlert extends Component {
   constructor(props) {

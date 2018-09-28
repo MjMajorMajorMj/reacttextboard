@@ -1,0 +1,13 @@
+.threadCard p {
+    display:inline-block;
+    margin: 0 5px;
+}
+
+.threadCard { 
+    text-align:center;
+}
+
+.threadCardText * {
+    text-align:center;
+    margin: 5px 0;
+}

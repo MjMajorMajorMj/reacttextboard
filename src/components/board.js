@@ -31,7 +31,6 @@ class Board extends Component {
     render() {
         return (
             <div className="threadHeader">
-                <h1 className="container text-center titleText">React Textboard</h1>
                 <h3 className="text-center">Board Name!</h3>
                 <ThreadList threads={this.state.threads} />
                 <div className="text-center">

@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import Thread from './components/thread';
-import Board from './components/board';
+import App from './components/app';
+
+import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(
-    <Board />,
-    //<Thread threadID='testthread' />,
+    <Router>
+        <App />
+    </Router>,
     document.getElementById('root')
 );

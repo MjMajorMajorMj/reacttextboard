@@ -48,7 +48,6 @@ class Thread extends Component {
     render() {
         return (
             <div className="threadHeader">
-                <h1 className="container text-center titleText">React Textboard</h1>
                 <h3 className="text-center">Thread Name!</h3>
                 <ReplyList replies={this.state.replies} />
                 <div className="text-center">

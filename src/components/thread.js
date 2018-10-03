@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SubmitPost from './submitPost';
 import ReplyList from './replyList';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import '../assets/css/thread.css';;
 
 class Thread extends Component {
@@ -48,6 +49,9 @@ class Thread extends Component {
     render() {
         return (
             <div className="threadHeader">
+                <div className="text-center">
+                    <button className="btn" onClick={this.props.refresh}><Link to='/'>Return</Link></button>
+                </div>
                 <h3 className="text-center">Thread Name!</h3>
                 <ReplyList replies={this.state.replies} />
                 <div className="text-center">

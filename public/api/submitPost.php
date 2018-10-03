@@ -72,10 +72,26 @@ function getInsertReply($insertID, $conn, $threadID) {
                 $output['data'][] = $row;
                 $output['replyFromServerMsg'] = "Reply success!";
             };
+            updateThreadTable($conn, $threadID);
         } else {
             $output['errors'][] = 'no data';
         };
     };
-}
+};
+
+function updateThreadTable($conn, $threadID) {
+    global $output;
+    $updateThreadQuery = "UPDATE `threads` SET `numOfPosts` = `numOfPosts` + 1 WHERE `threadName` = '$threadID'";
+    $updateThreadResult = mysqli_query($conn, $updateThreadQuery);
+    if (empty($updateThreadResult)) {
+        $output['errors'][] = 'database error - updateThreadTable';
+    } else {
+        if ($updateThreadResult > 0 ) {
+            $output['success'] = true;
+        } else {
+            $output['errors'][] = 'no data';
+        };
+    };
+};
 
 ?>

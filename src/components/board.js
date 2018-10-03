@@ -37,7 +37,7 @@ class Board extends Component {
             return (
                 <Route
                     path={threadNameRoute}
-                    render={(props) => <Thread {...props} threadID={item.threadName} />}
+                    render={(props) => <Thread {...props} threadID={item.threadName} refresh={this.fetchThreadsFromBoard}/>}
                     key={index}
                 />
             )
@@ -47,7 +47,7 @@ class Board extends Component {
                 <h3 className="text-center">Board Name!</h3>
                 <Route
                     exact path="/"
-                    render={(props) => <ThreadList {...props} threads={this.state.threads} />}
+                    render={(props) => <ThreadList {...props} threads={this.state.threads} refresh={this.fetchThreadsFromBoard} />}
                 />
                 <div>{threadRoute}</div>
             </div>

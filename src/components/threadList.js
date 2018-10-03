@@ -9,7 +9,10 @@ class ThreadList extends Component {
             )
         });
         return (
-            <div>{thread}</div>
+            <div className="text-center">
+                <div>{thread}</div>
+                <button className="refreshThreadBtn btn m-2" onClick={this.fetchThreadsFromBoard}>Refresh</button>
+            </div>
         )
     }
 }

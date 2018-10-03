@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ThreadList from './threadList';
+import Thread from './thread';
 import axios from 'axios';
+import { Route } from 'react-router-dom';
 
 class Board extends Component {
     constructor(props) {
@@ -29,13 +31,25 @@ class Board extends Component {
         });
     }
     render() {
+        const { threads } = this.state;
+        const threadRoute = threads.map((item, index) => {
+            const threadNameRoute = "/" + item.threadName;
+            return (
+                <Route
+                    path={threadNameRoute}
+                    render={(props) => <Thread {...props} threadID={item.threadName} />}
+                    key={index}
+                />
+            )
+        });
         return (
-            <div className="threadHeader">
+            <div className="boardDiv">
                 <h3 className="text-center">Board Name!</h3>
-                <ThreadList threads={this.state.threads} />
-                <div className="text-center">
-                    <button className="refreshThreadBtn btn m-2" onClick={this.fetchThreadsFromBoard}>Refresh</button>
-                </div>
+                <Route
+                    exact path="/"
+                    render={(props) => <ThreadList {...props} threads={this.state.threads} />}
+                />
+                <div>{threadRoute}</div>
             </div>
         )
     }

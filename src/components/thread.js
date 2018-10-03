@@ -12,10 +12,10 @@ class Thread extends Component {
         }
         this.addReply = this.addReply.bind(this);
         this.fetchRepliesFromThread = this.fetchRepliesFromThread.bind(this);
-    }
+    };
     componentDidMount() {
         this.fetchRepliesFromThread();
-    }
+    };
     fetchRepliesFromThread() {
         let params = new URLSearchParams();
         params.append('action', 'readReplies');
@@ -31,7 +31,7 @@ class Thread extends Component {
                 console.log('error');
             };
         });
-    }
+    };
     addReply(reply) {
         let params = new URLSearchParams();
         const replyMsgToServer = reply.message;
@@ -44,7 +44,7 @@ class Thread extends Component {
                 replies: [...this.state.replies, insertedReply]
             });
         });
-    }
+    };
     render() {
         return (
             <div className="threadHeader">

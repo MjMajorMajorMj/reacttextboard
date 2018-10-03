@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import '../assets/css/threadLink.css';
 
 export default props => {
-    const { threadTitle, dateUpdated, numOfPosts } = props.thread;
+    const { threadTitle, dateUpdated, numOfPosts, threadName } = props.thread;
+    const threadNameLink = "/" + threadName;
     return (
         <div className="col-12 my-1">
             <div className="card">
@@ -14,7 +15,7 @@ export default props => {
                 <div className="card-block">
                     <h4 className="card-title">
                         <div className="card-text threadCardText">
-                            <Link to="/test">{threadTitle}</Link>
+                            <Link to={threadNameLink}>{threadTitle}</Link>
                         </div>
                     </h4>
                 </div>

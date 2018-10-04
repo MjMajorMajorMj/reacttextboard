@@ -50,9 +50,9 @@ class Thread extends Component {
         return (
             <div className="threadHeader">
                 <div className="text-center">
-                    <button className="btn" onClick={this.props.refresh}><Link to='/'>Return</Link></button>
+                    <Link to='/'><button className="btn" onClick={this.props.refresh}>Return</button></Link>
                 </div>
-                <h3 className="text-center">Thread Name!</h3>
+                <h3 className="text-center">{this.props.title}</h3>
                 <ReplyList replies={this.state.replies} />
                 <div className="text-center">
                     <button className="refreshThreadBtn btn m-2" onClick={this.fetchRepliesFromThread}>Refresh</button>

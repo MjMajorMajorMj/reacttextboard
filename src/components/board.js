@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ThreadList from './threadList';
 import Thread from './thread';
 import axios from 'axios';
+import ThreadForm from './newThreadForm';
 import { Route } from 'react-router-dom';
 
 class Board extends Component {
@@ -29,15 +30,15 @@ class Board extends Component {
                 console.log('error');
             };
         });
-    }
+    };
     render() {
         const { threads } = this.state;
         const threadRoute = threads.map((item, index) => {
-            const threadNameRoute = "/" + item.threadName;
+            const threadNameRoute = "/" + item.threadID;
             return (
                 <Route
                     path={threadNameRoute}
-                    render={(props) => <Thread {...props} threadID={item.threadName} refresh={this.fetchThreadsFromBoard}/>}
+                    render={(props) => <Thread {...props} threadID={item.threadName} refresh={this.fetchThreadsFromBoard} title={item.threadTitle}/>}
                     key={index}
                 />
             )
@@ -45,6 +46,10 @@ class Board extends Component {
         return (
             <div className="boardDiv">
                 <h3 className="text-center">Board Name!</h3>
+                <div className="text-center">
+                    <button className="btn">Create New Thread</button>
+                    <ThreadForm />
+                </div>
                 <Route
                     exact path="/"
                     render={(props) => <ThreadList {...props} threads={this.state.threads} refresh={this.fetchThreadsFromBoard} />}

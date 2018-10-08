@@ -20,6 +20,9 @@ switch($_POST['action']){
 	case 'readThreads':
 		include 'readThreads.php';
 		break;
+	case 'createThread':
+		include 'createThread.php';
+		break;
 };
 $outputJSON = json_encode($output);
 print($outputJSON);

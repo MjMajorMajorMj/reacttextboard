@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Field from './fieldReply';
 import axios from 'axios';
+import ReCAPTCHA from "react-google-recaptcha";
 
 class ThreadForm extends Component {
     constructor(props) {
@@ -9,12 +10,19 @@ class ThreadForm extends Component {
             form: {
                 threadName: '',
                 threadComment: ''
-            }
+            },
+            captchaSet: false,
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.reset = this.reset.bind(this);
         this.createThread = this.createThread.bind(this);
+        this.setCaptcha = this.setCaptcha.bind(this);
+    };
+    setCaptcha() {
+        this.setState({
+            captchaSet: true
+        });
     };
     handleInputChange(event) {
         const { value, name } = event.target;
@@ -26,9 +34,12 @@ class ThreadForm extends Component {
     };
     handleSubmit(event) {
         event.preventDefault();
-        console.log('handleSubmit called, form values are:', this.state.form);
-        this.createThread();
-        this.reset();
+        if (!this.state.captchaSet) {
+            console.log('fug');
+        } else {
+            this.createThread();
+            this.reset();
+        }
     };
     createThread() {
         const { threadName, threadComment } = this.state.form;
@@ -45,8 +56,10 @@ class ThreadForm extends Component {
             form: {
                 threadName: '',
                 threadComment: ''
-            }
+            },
+            captchaSet: false
         });
+        window.grecaptcha.reset();
     };
     render() {
         const { threadName, threadComment } = this.state.form;
@@ -54,7 +67,13 @@ class ThreadForm extends Component {
             <form onSubmit={this.handleSubmit}>
                 <Field name="threadName" label="Title" type="text" value={threadName} onChange={this.handleInputChange} />
                 <Field name="threadComment" label="Comment" type="text" value={threadComment} onChange={this.handleInputChange} />
-                <button>Add Contact</button>
+                <div className="captchaDiv">
+                    <ReCAPTCHA
+                        sitekey="6Lfr4HEUAAAAAD9uGSjg7_LtC2cjZ2ZkK9nU_h49"
+                        onChange={this.setCaptcha}
+                    />
+                </div>
+                <button className='btn'>Add Contact</button>
             </form>
         )
     }

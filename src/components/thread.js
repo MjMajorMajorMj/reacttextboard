@@ -34,6 +34,7 @@ class Thread extends Component {
         });
     };
     addReply(reply) {
+        console.log(this.props);
         let params = new URLSearchParams();
         const replyMsgToServer = reply.message;
         params.append('replyMsg', replyMsgToServer);

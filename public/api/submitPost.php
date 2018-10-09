@@ -13,7 +13,7 @@ if (empty($findUserResult)) {
         while($row = mysqli_fetch_assoc($findUserResult)){
             $userIDfromDB = $row['userID'];
         };
-        $replyMsg = $_POST['replyMsg'];
+        $replyMsg =  mysqli_real_escape_string($conn, $_POST['replyMsg']);
 		addReplyToThread($replyMsg, $userIDfromDB, $conn);
     } else {
         addUserToDB($userIP, $conn);

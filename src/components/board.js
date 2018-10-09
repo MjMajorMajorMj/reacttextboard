@@ -3,18 +3,26 @@ import ThreadList from './threadList';
 import Thread from './thread';
 import axios from 'axios';
 import { Route } from 'react-router-dom';
+import ReplyAlert from './replyAlert';
 
 class Board extends Component {
     constructor(props) {
         super(props);
         this.state = {
             threads: [],
+            replyAlertVisible: false
         }
         this.fetchThreadsFromBoard = this.fetchThreadsFromBoard.bind(this);
+        this.replyAlertDismiss = this.replyAlertDismiss.bind(this);
     };
     componentDidMount() {
         this.fetchThreadsFromBoard();
     }
+    replyAlertDismiss() {
+        this.setState({
+            replyAlertVisible: false
+        });
+    };
     fetchThreadsFromBoard() {
         let params = new URLSearchParams();
         params.append('action', 'readThreads');
@@ -26,12 +34,18 @@ class Board extends Component {
                     threads: responseData
                 });
             } else {
-                console.log('error');
+                this.setState({
+                    replyAlertVisible: true
+                });
             };
+        }).catch((error) => {
+            this.setState({
+                replyAlertVisible: true
+            });
         });
     };
     render() {
-        const { threads } = this.state;
+        const { threads, replyAlertVisible } = this.state;
         const threadRoute = threads.map((item, index) => {
             const threadNameRoute = "/" + item.threadID;
             return (
@@ -44,12 +58,13 @@ class Board extends Component {
         });
         return (
             <div className="boardDiv">
-                <h3 className="text-center">Board Name!</h3>
+                <h3 className="text-center">General Topics</h3>
                 <Route
                     exact path="/"
                     render={(props) => <ThreadList {...props} threads={this.state.threads} refresh={this.fetchThreadsFromBoard} />}
                 />
                 <div>{threadRoute}</div>
+                <ReplyAlert successColor='warning' replyAlertMsg='Connection Failed' replyAlertVisible={replyAlertVisible} replyAlertDismiss={this.replyAlertDismiss}/>
             </div>
         )
     }

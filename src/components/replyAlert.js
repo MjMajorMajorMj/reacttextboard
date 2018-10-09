@@ -11,25 +11,27 @@ class ReplyAlert extends Component {
     this.onDismiss = this.onDismiss.bind(this);
   }
   componentDidUpdate() {
-      const { visible } = this.state;
-      if (!visible) {
-          if (this.props.replyAlertVisible) {
-              this.setState({
-                  visible: true
-              });
-          }
+    const { visible } = this.state;
+    if (!visible) {
+      if (this.props.replyAlertVisible) {
+        this.setState({
+          visible: true
+        });
       }
+    }
   }
   onDismiss() {
     this.setState({ visible: false });
     this.props.replyAlertDismiss();
   }
   render() {
-      const {successColor, replyAlertMsg } = this.props;
+    const { successColor, replyAlertMsg } = this.props;
     return (
-      <Alert className="replyAlert" color={successColor} isOpen={this.state.visible} toggle={this.onDismiss}>
-        {replyAlertMsg}
-      </Alert>
+      <div className="text-center">
+        <Alert className="replyAlert" color={successColor} isOpen={this.state.visible} toggle={this.onDismiss}>
+          {replyAlertMsg}
+        </Alert>
+      </div>
     );
   }
 }

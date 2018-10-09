@@ -36,6 +36,7 @@ function updateThreadsTable($threadTitle, $threadName, $conn) {
     } else {
         if ($updateThreadsResult > 0 ) {
             $threadNumID = mysqli_insert_id($conn);
+            $output['threadNumID'] = $threadNumID;
             updateInsertedThread($threadName, $threadNumID, $conn);
         } else {
             $output['errors'][] = 'Failed to insert thread';

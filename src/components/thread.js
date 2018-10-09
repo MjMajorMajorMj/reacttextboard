@@ -3,6 +3,7 @@ import SubmitPost from './submitPost';
 import ReplyList from './replyList';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import ReplyAlert from './replyAlert';
 import '../assets/css/thread.css';;
 
 class Thread extends Component {
@@ -10,12 +11,19 @@ class Thread extends Component {
         super(props);
         this.state = {
             replies: [],
+            replyAlertVisible: false
         }
         this.addReply = this.addReply.bind(this);
         this.fetchRepliesFromThread = this.fetchRepliesFromThread.bind(this);
+        this.replyAlertDismiss = this.replyAlertDismiss.bind(this);
     };
     componentDidMount() {
         this.fetchRepliesFromThread();
+    };
+    replyAlertDismiss() {
+        this.setState({
+            replyAlertVisible: false
+        });
     };
     fetchRepliesFromThread() {
         let params = new URLSearchParams();
@@ -29,12 +37,17 @@ class Thread extends Component {
                     replies: responseData
                 });
             } else {
-                console.log('error');
+                this.setState({
+                    replyAlertVisible: true
+                });
             };
+        }).catch((error) => {
+            this.setState({
+                replyAlertVisible: true
+            });
         });
     };
     addReply(reply) {
-        console.log(this.props);
         let params = new URLSearchParams();
         const replyMsgToServer = reply.message;
         params.append('replyMsg', replyMsgToServer);
@@ -48,6 +61,7 @@ class Thread extends Component {
         });
     };
     render() {
+        const { replyAlertVisible } = this.state;
         return (
             <div className="threadHeader">
                 <div className="text-center">
@@ -59,6 +73,7 @@ class Thread extends Component {
                     <button className="refreshThreadBtn btn m-2" onClick={this.fetchRepliesFromThread}>Refresh</button>
                 </div>
                 <SubmitPost add={this.addReply} />
+                <ReplyAlert successColor='warning' replyAlertMsg='Connection Failed' replyAlertVisible={replyAlertVisible} replyAlertDismiss={this.replyAlertDismiss}/>
             </div>
         )
     }

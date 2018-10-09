@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Field from './fieldReply';
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
+import { withRouter } from "react-router-dom";
+import '../assets/css/theadForm.css';
 
 class ThreadForm extends Component {
     constructor(props) {
@@ -12,6 +14,7 @@ class ThreadForm extends Component {
                 threadComment: ''
             },
             captchaSet: false,
+            redirect: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,7 +38,7 @@ class ThreadForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
         if (!this.state.captchaSet) {
-            console.log('fug');
+            console.log('Captcha not set.');
         } else {
             this.createThread();
             this.reset();
@@ -48,7 +51,10 @@ class ThreadForm extends Component {
         params.append('threadComment', threadComment);
         params.append('action', 'createThread');
         axios.post('/api/data.php', params).then((resp) => {
-            console.log(resp.data);
+            this.props.refresh();
+            const threadNumID = resp.data.threadNumID;
+            const threadNumRoute = "./"+threadNumID;
+            this.props.history.push(threadNumRoute);
         });
     };
     reset() {
@@ -73,10 +79,12 @@ class ThreadForm extends Component {
                         onChange={this.setCaptcha}
                     />
                 </div>
-                <button className='btn'>Add Contact</button>
+                <div className="text-center">
+                    <button className='btn m-2'>Submit</button>
+                </div>
             </form>
         )
     }
 }
 
-export default ThreadForm;
+export default withRouter(ThreadForm);

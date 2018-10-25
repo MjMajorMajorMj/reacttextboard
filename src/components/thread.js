@@ -65,12 +65,12 @@ class Thread extends Component {
         return (
             <div className="threadHeader">
                 <div className="text-center">
-                    <Link to='/'><button className="btn" onClick={this.props.refresh}>Return</button></Link>
+                    <Link to='/'><button className="btn btn-primary" onClick={this.props.refresh}>Return</button></Link>
                 </div>
                 <h3 className="text-center">{this.props.title}</h3>
                 <ReplyList replies={this.state.replies} />
                 <div className="text-center">
-                    <button className="refreshThreadBtn btn m-2" onClick={this.fetchRepliesFromThread}>Refresh</button>
+                    <button className="refreshThreadBtn btn btn-primary m-2" onClick={this.fetchRepliesFromThread}>Refresh</button>
                 </div>
                 <SubmitPost add={this.addReply} />
                 <ReplyAlert successColor='warning' replyAlertMsg='Connection Failed' replyAlertVisible={replyAlertVisible} replyAlertDismiss={this.replyAlertDismiss}/>

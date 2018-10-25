@@ -80,7 +80,7 @@ class ThreadForm extends Component {
                     />
                 </div>
                 <div className="text-center">
-                    <button className='btn m-2'>Submit</button>
+                    <button className='btn btn-primary m-2'>Submit</button>
                 </div>
             </form>
         )

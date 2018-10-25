@@ -36,12 +36,12 @@ class ThreadList extends Component {
         return (
             <div className="text-center">
                 <div className="text-center">
-                    <button className="btn" onClick={this.showThreadForm}>Create New Thread</button>
+                    <button className="btn btn-primary" onClick={this.showThreadForm}>Create New Thread</button>
                     { threadFormComponent }
                 </div>
                 <div>{thread}</div>
                 <div className="text-center">
-                    <button className="refreshThreadBtn btn m-2" onClick={this.props.refresh}>Refresh</button>
+                    <button className="refreshThreadBtn btn btn-primary m-2" onClick={this.props.refresh}>Refresh</button>
                 </div>
             </div>
         )

@@ -5,7 +5,7 @@ if(empty($_POST['action'])){
 	exit('no action specified');
 };
 
-require('mysql_connect.php');
+require('../../src/mysql_connect.php');
 $output = [
 	'success'=> false,
 	'errors'=>[]

@@ -80,7 +80,7 @@ class SubmitPost extends Component {
                     />
                 </div>
                 <div className="text-center">
-                    <button className="submitPostBtn btn m-2">Submit</button>
+                    <button className="submitPostBtn btn btn-primary m-2">Submit</button>
                 </div>
                 <ReplyAlert successColor={successColor} replyAlertMsg={replyAlertMsg} replyAlertVisible={replyAlertVisible} replyAlertDismiss={this.replyAlertDismiss}/>
             </form>
